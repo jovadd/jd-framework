@@ -1,0 +1,25 @@
+{
+  "name": "jd-framework",
+  "version": "1.0.0",
+  "description": "Framework CSS minimo per i progetti Astro: spaziature, tipografia e layout. CSS puro, nessuna dipendenza.",
+  "license": "MIT",
+  "author": "jovadd",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovadd/jd-framework.git"
+  },
+  "keywords": ["css", "framework", "fluid-typography", "utopia", "every-layout", "astro"],
+  "style": "framework.css",
+  "exports": {
+    "./framework.css": "./framework.css",
+    "./tokens.default.css": "./tokens.default.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "framework.css",
+    "tokens.default.css"
+  ],
+  "sideEffects": [
+    "*.css"
+  ]
+}

@@ -1,0 +1,116 @@
+/*! jd-framework v1.0.0 | MIT | github.com/jovadd/jd-framework
+   STRUTTURA del framework: non modificare nei progetti.
+   I valori stanno in tokens.css, le eccezioni in site.css. */
+
+@layer jd.reset, jd.base, jd.layout, components, site;
+
+/* Reset minimo e moderno */
+@layer jd.reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  html { -webkit-text-size-adjust: none; text-size-adjust: none; overflow-x: clip; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  img, picture, video, canvas, svg { display: block; max-inline-size: 100%; block-size: auto; }
+  input, button, textarea, select { font: inherit; }
+  p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+}
+
+/* Base: solo tipografia degli elementi, nessuna classe */
+@layer jd.base {
+  body {
+    font-family: var(--jd-font-body);
+    font-size: var(--jd-text-0);
+    font-weight: var(--jd-weight-regular);
+    line-height: var(--jd-leading-normal);
+    letter-spacing: var(--jd-tracking-normal);
+    color: var(--jd-color-text);
+    background-color: var(--jd-color-bg);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--jd-font-heading);
+    font-weight: var(--jd-weight-bold);
+    line-height: var(--jd-leading-tight);
+    letter-spacing: var(--jd-tracking-tight);
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--jd-text-5); }
+  h2 { font-size: var(--jd-text-4); }
+  h3 { font-size: var(--jd-text-3); }
+  h4 { font-size: var(--jd-text-2); }
+  h5 { font-size: var(--jd-text-1); }
+  h6 { font-size: var(--jd-text-0); }
+  p { text-wrap: pretty; }
+  ul, ol { padding-inline-start: var(--jd-space-m); }
+  small { font-size: var(--jd-text--1); }
+  strong, b { font-weight: var(--jd-weight-bold); }
+  blockquote {
+    padding-inline-start: var(--jd-space-m);
+    border-inline-start: var(--jd-border-width) solid currentColor;
+  }
+  code, kbd, samp, pre { font-family: var(--jd-font-mono); font-size: var(--jd-code-size); }
+  pre { overflow-x: auto; }
+  :focus-visible {
+    outline: var(--jd-focus-width) solid var(--jd-focus-color);
+    outline-offset: var(--jd-focus-offset);
+  }
+}
+
+/* Layout: primitive in stile Every Layout, regolabili con variabili locali */
+@layer jd.layout {
+  /* Container: larghezza massima del contenuto + gutter laterale */
+  .jd-container {
+    box-sizing: content-box;
+    max-inline-size: var(--jd-container-max);
+    margin-inline: auto;
+    padding-inline: var(--jd-gutter);
+  }
+  .jd-container--narrow { max-inline-size: var(--jd-container-narrow); }
+  .jd-container--wide { max-inline-size: var(--jd-container-wide); }
+
+  /* Section: padding verticale */
+  .jd-section { padding-block: var(--jd-section-space); }
+  .jd-section--s { padding-block: var(--jd-space-m-xl); }
+  .jd-section--l { padding-block: var(--jd-space-xl-3xl); }
+
+  /* Stack: colonna con spazio uniforme */
+  .jd-stack { display: flex; flex-direction: column; gap: var(--jd-stack-gap); }
+
+  /* Cluster: riga che va a capo */
+  .jd-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jd-cluster-gap);
+    justify-content: var(--jd-cluster-justify);
+    align-items: var(--jd-cluster-align);
+  }
+
+  /* Grid: colonne auto-fit, mai più strette di --jd-grid-min */
+  .jd-grid {
+    display: grid;
+    gap: var(--jd-grid-gap);
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--jd-grid-min), 100%), 1fr));
+  }
+
+  /* Sidebar: primo figlio fisso, l'altro fluido; si impila sotto --jd-sidebar-content-min */
+  .jd-sidebar { display: flex; flex-wrap: wrap; gap: var(--jd-sidebar-gap); }
+  .jd-sidebar > :first-child,
+  .jd-sidebar--end > :last-child { flex: 1 1 var(--jd-sidebar-width); min-inline-size: 0; }
+  .jd-sidebar > *,
+  .jd-sidebar--end > :first-child { flex: 999 1 0; min-inline-size: var(--jd-sidebar-content-min); }
+
+  /* Switcher: colonna sotto --jd-switcher-threshold, riga sopra */
+  .jd-switcher { display: flex; flex-wrap: wrap; gap: var(--jd-switcher-gap); }
+  .jd-switcher > * { flex-grow: 1; flex-basis: calc((var(--jd-switcher-threshold) - 100%) * 999); }
+
+  /* Flow: ritmo verticale nei testi lunghi */
+  .jd-flow { max-inline-size: var(--jd-measure); }
+  .jd-flow > * + * { margin-block-start: var(--jd-flow-space); }
+  .jd-flow > * + :is(h2, h3) { margin-block-start: var(--jd-flow-heading-space); }
+
+  /* Full bleed: da bordo a bordo del viewport */
+  .jd-full-bleed { margin-inline: calc(50% - 50vw); }
+
+  /* Contenitore per le container queries dei componenti */
+  .jd-cq { container-type: inline-size; }
+}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jd-framework — demo</title>
+<link rel="stylesheet" href="../tokens.default.css">
+<link rel="stylesheet" href="../framework.css">
+<style>
+/* Solo per la demo: colori per rendere visibili le aree. Non fanno parte del framework. */
+@layer site {
+  :root { --demo-a: #e8eefc; --demo-b: #3d63dd; --demo-c: #fcefe3; --demo-line: #d0d0d0; --demo-muted: #666; }
+  .demo-bar { position: sticky; inset-block-start: 0; z-index: 10; background: #1a1a1a; color: #fff; padding-block: var(--jd-space-2xs); font-size: var(--jd-text--1); }
+  .demo-bar b { font-variant-numeric: tabular-nums; }
+  .demo-label { font-family: var(--jd-font-mono); font-size: var(--jd-text--1); font-weight: var(--jd-weight-regular); letter-spacing: var(--jd-tracking-normal); color: var(--demo-muted); }
+  .demo-px { font-family: var(--jd-font-mono); font-size: var(--jd-text--2); color: var(--demo-b); white-space: nowrap; }
+  .demo-box { background: var(--demo-a); padding: var(--jd-space-xs); border-radius: 0.25rem; }
+  .demo-box--alt { background: var(--demo-c); }
+  .demo-sep { border: 0; border-block-start: 1px solid var(--demo-line); }
+  .demo-type { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: var(--jd-space-xs) var(--jd-space-s); align-items: baseline; }
+  .demo-type > :nth-child(even) { line-height: var(--jd-leading-tight); font-family: var(--jd-font-heading); }
+  .demo-space { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: var(--jd-space-2xs) var(--jd-space-s); align-items: center; }
+  .demo-space .bar { display: block; block-size: 1rem; background: var(--demo-b); }
+  .demo-show { background: var(--demo-c); }
+  .demo-show > div { background: var(--demo-a); outline: 1px dashed var(--demo-b); padding-block: var(--jd-space-xs); }
+  .demo-section .demo-box { background: #fff; }
+  .demo-bleed { background: var(--demo-b); color: #fff; padding: var(--jd-space-m); text-align: center; }
+  .demo-hero { font-size: var(--jd-text-7); line-height: var(--jd-leading-tight); }
+  /* Esempio di container query in un componente del progetto */
+  .demo-card { display: grid; gap: var(--jd-space-s); }
+  @container (min-width: 30rem) { .demo-card { grid-template-columns: 8rem 1fr; } }
+  .demo-card__img { background: var(--demo-c); min-block-size: 5rem; border-radius: 0.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="jd-container jd-cluster" style="--jd-cluster-justify: space-between">
+    <span>jd-framework · demo</span>
+    <span>viewport <b id="vw">–</b>px · testo <b id="base">–</b>px · gutter <b id="gut">–</b>px</span>
+  </div>
+</div>
+
+<main>
+  <section class="jd-section jd-section--l">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-m)">
+      <p class="demo-label">--jd-text-7 · display</p>
+      <p class="demo-hero"><strong>Spaziature, tipografia e layout.</strong></p>
+      <p style="max-inline-size: var(--jd-measure)">Questa pagina usa <code>tokens.default.css</code> e <code>framework.css</code> così come sono. Ridimensiona la finestra: i numeri in blu sono i valori calcolati alla larghezza attuale, fluidi tra 360 e 1440px. I colori azzurro e arancio servono solo alla demo.</p>
+    </div>
+  </section>
+
+  <hr class="demo-sep">
+
+  <section class="jd-section">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-l)">
+      <h2>Scala tipografica</h2>
+      <div class="demo-type" id="type-scale"></div>
+    </div>
+  </section>
+
+  <hr class="demo-sep">
+
+  <section class="jd-section">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-l)">
+      <h2>Spaziature</h2>
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>Passi singoli</h3>
+        <div class="demo-space" id="space-single"></div>
+      </div>
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>Coppie</h3>
+        <p class="demo-label">Crescono di più tra mobile e desktop: per sezioni e gutter.</p>
+        <div class="demo-space" id="space-pairs"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="demo-sep">
+
+  <section class="jd-section">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+      <h2>.jd-container</h2>
+      <p class="demo-label">Arancio = gutter (--jd-gutter) · Azzurro = area del contenuto</p>
+    </div>
+  </section>
+  <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+    <div class="demo-show"><div class="jd-container jd-container--narrow"><span class="demo-label">.jd-container--narrow</span> <span class="demo-px" data-w></span></div></div>
+    <div class="demo-show"><div class="jd-container"><span class="demo-label">.jd-container</span> <span class="demo-px" data-w></span></div></div>
+    <div class="demo-show"><div class="jd-container jd-container--wide"><span class="demo-label">.jd-container--wide</span> <span class="demo-px" data-w></span></div></div>
+  </div>
+
+  <section class="jd-section">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+      <h2>.jd-section</h2>
+      <p class="demo-label">Arancio = padding verticale della sezione</p>
+    </div>
+  </section>
+  <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+    <div class="jd-section jd-section--s demo-show demo-section"><div class="jd-container"><div class="demo-box"><span class="demo-label">.jd-section--s</span> <span class="demo-px" data-pad></span></div></div></div>
+    <div class="jd-section demo-show demo-section"><div class="jd-container"><div class="demo-box"><span class="demo-label">.jd-section</span> <span class="demo-px" data-pad></span></div></div></div>
+    <div class="jd-section jd-section--l demo-show demo-section"><div class="jd-container"><div class="demo-box"><span class="demo-label">.jd-section--l</span> <span class="demo-px" data-pad></span></div></div></div>
+  </div>
+
+  <section class="jd-section">
+    <div class="jd-container jd-stack" style="--jd-stack-gap: var(--jd-space-xl)">
+      <h2>Classi di layout</h2>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-stack <span class="demo-label">--jd-stack-gap: var(--jd-space-xs)</span></h3>
+        <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-xs)" id="demo-stack">
+          <div class="demo-box">uno</div><div class="demo-box">due</div><div class="demo-box">tre</div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-cluster</h3>
+        <div class="jd-cluster" id="demo-cluster">
+          <div class="demo-box">Home</div><div class="demo-box">Servizi</div><div class="demo-box">Chi siamo</div><div class="demo-box">Lavori</div><div class="demo-box">Blog</div><div class="demo-box">Contatti</div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-grid <span class="demo-label">--jd-grid-min: 16rem</span></h3>
+        <div class="jd-grid" id="demo-grid">
+          <div class="demo-box">1</div><div class="demo-box">2</div><div class="demo-box">3</div><div class="demo-box">4</div><div class="demo-box">5</div><div class="demo-box">6</div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-sidebar <span class="demo-label">--jd-sidebar-width: 20rem</span></h3>
+        <div class="jd-sidebar" id="demo-sidebar">
+          <div class="demo-box demo-box--alt">sidebar (20rem)</div>
+          <div class="demo-box">contenuto fluido: si impila quando scenderebbe sotto il 50%</div>
+        </div>
+        <div class="jd-sidebar jd-sidebar--end" id="demo-sidebar-end">
+          <div class="demo-box">contenuto fluido</div>
+          <div class="demo-box demo-box--alt">sidebar (.jd-sidebar--end)</div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-switcher <span class="demo-label">--jd-switcher-threshold: 40rem</span></h3>
+        <div class="jd-switcher" id="demo-switcher">
+          <div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-cq <span class="demo-label">container query del componente a 30rem</span></h3>
+        <div class="jd-grid" style="--jd-grid-min: 12rem">
+          <div class="jd-cq"><div class="demo-card demo-box"><div class="demo-card__img"></div><p>Card in una colonna stretta: immagine sopra.</p></div></div>
+          <div class="jd-cq" style="grid-column: 1 / -1"><div class="demo-card demo-box"><div class="demo-card__img"></div><p>Stessa card su tutta la riga: sopra i 30rem di contenitore l'immagine va a sinistra.</p></div></div>
+        </div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-full-bleed</h3>
+        <div class="demo-bleed jd-full-bleed" id="demo-bleed">da bordo a bordo, anche dentro il container</div>
+      </div>
+
+      <div class="jd-stack" style="--jd-stack-gap: var(--jd-space-s)">
+        <h3>.jd-flow <span class="demo-label">testo lungo, misura --jd-measure</span></h3>
+        <article class="jd-flow">
+          <h2>Informativa privacy</h2>
+          <p>Questo è un paragrafo di testo continuo per verificare interlinea, misura e ritmo verticale. La classe <code>.jd-flow</code> aggiunge spazio tra gli elementi fratelli; prima di h2 e h3 lo spazio aumenta.</p>
+          <p>Secondo paragrafo con <a href="#">un link</a>, del testo <strong>in grassetto</strong> e un <small>testo small</small>.</p>
+          <h3>Dati raccolti</h3>
+          <ul><li>Nome e cognome</li><li>Indirizzo email</li><li>Dati di navigazione</li></ul>
+          <blockquote><p>Una citazione nel blockquote, con il filetto sul lato iniziale.</p></blockquote>
+          <pre><code>import 'jd-framework/framework.css'</code></pre>
+          <h4>Titolo h4</h4>
+          <h5>Titolo h5</h5>
+          <h6>Titolo h6</h6>
+          <p>Paragrafo finale dopo i titoli minori.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const T = [['7','display'],['6','display'],['5','h1'],['4','h2'],['3','h3'],['2','h4'],['1','h5'],['0','body · h6'],['-1','small'],['-2','note']];
+const S = ['3xs','2xs','xs','s','m','l','xl','2xl','3xl'];
+const P = ['3xs-2xs','2xs-xs','xs-s','s-m','m-l','l-xl','xl-2xl','2xl-3xl','s-l','m-xl','l-2xl','xl-3xl'];
+const probe = document.createElement('div');
+probe.style.cssText = 'position:absolute;visibility:hidden';
+document.body.append(probe);
+const px = v => { probe.style.width = `var(${v})`; return Math.round(probe.getBoundingClientRect().width * 10) / 10; };
+const ts = document.getElementById('type-scale');
+T.forEach(([s, use]) => ts.insertAdjacentHTML('beforeend',
+  `<div><div class="demo-label">--jd-text-${s}</div><div class="demo-px" data-v="--jd-text-${s}"></div><div class="demo-label">${use}</div></div>` +
+  `<div style="font-size: var(--jd-text-${s}); font-weight: ${+s > 0 ? 'var(--jd-weight-bold)' : 'var(--jd-weight-regular)'}">La veloce volpe salta</div>`));
+const row = (id, n) => document.getElementById(id).insertAdjacentHTML('beforeend',
+  `<div><div class="demo-label">--jd-space-${n}</div><div class="demo-px" data-v="--jd-space-${n}"></div></div><span class="bar" style="inline-size: var(--jd-space-${n})"></span>`);
+S.forEach(n => row('space-single', n));
+P.forEach(n => row('space-pairs', n));
+function update() {
+  document.getElementById('vw').textContent = document.documentElement.clientWidth;
+  document.getElementById('base').textContent = px('--jd-text-0');
+  document.getElementById('gut').textContent = px('--jd-gutter');
+  document.querySelectorAll('[data-v]').forEach(e => e.textContent = px(e.dataset.v) + 'px');
+  document.querySelectorAll('[data-w]').forEach(e => { const c = e.parentElement, p = parseFloat(getComputedStyle(c).paddingInlineStart); e.textContent = `contenuto ${Math.round(c.clientWidth - 2 * p)}px`; });
+  document.querySelectorAll('[data-pad]').forEach(e => e.textContent = `padding-block ${Math.round(parseFloat(getComputedStyle(e.closest('.jd-section')).paddingBlockStart))}px`);
+}
+update();
+addEventListener('resize', update);
+</script>
+</body>
+</html>

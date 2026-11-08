@@ -1,0 +1,94 @@
+/* jd-framework — tokens.default.css
+   VALORI di default, neutri. In ogni progetto copia questo file in
+   src/styles/tokens.css e personalizzalo: il framework legge solo queste variabili.
+   Tutto in rem, così rispetta la dimensione del testo scelta dall'utente. */
+
+:root {
+  /* Tipografia fluida (stile utopia.fyi)
+     viewport 360 → 1440px · base 16px → 18px · rapporto 1.2 → 1.333
+     passi negativi: rapporto 1.2 anche a 1440px, per restare leggibili
+     passi 6 e 7: display, per titoli hero (non assegnati a elementi) */
+  --jd-text--2: clamp(0.6944rem, 0.6655rem + 0.1286vw, 0.7813rem);
+  --jd-text--1: clamp(0.8333rem, 0.7986rem + 0.1543vw, 0.9375rem);
+  --jd-text-0: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+  --jd-text-1: clamp(1.2rem, 1.1001rem + 0.4439vw, 1.4996rem);
+  --jd-text-2: clamp(1.44rem, 1.2537rem + 0.8281vw, 1.999rem);
+  --jd-text-3: clamp(1.728rem, 1.4158rem + 1.3877vw, 2.6647rem);
+  --jd-text-4: clamp(2.0736rem, 1.5808rem + 2.1902vw, 3.552rem);
+  --jd-text-5: clamp(2.4883rem, 1.7395rem + 3.3281vw, 4.7348rem);
+  --jd-text-6: clamp(2.986rem, 1.8775rem + 4.9267vw, 6.3115rem);
+  --jd-text-7: clamp(3.5832rem, 1.9732rem + 7.1557vw, 8.4132rem);
+
+  /* Spaziature fluide (stile utopia.fyi)
+     viewport 360 → 1440px · passo s 16px → 20px
+     moltiplicatori: 3xs .25 · 2xs .5 · xs .75 · s 1 · m 1.5 · l 2 · xl 3 · 2xl 4 · 3xl 6
+     coppie: dal valore minimo del primo passo al massimo del secondo */
+  --jd-space-3xs: clamp(0.25rem, 0.2292rem + 0.0926vw, 0.3125rem);
+  --jd-space-2xs: clamp(0.5rem, 0.4583rem + 0.1852vw, 0.625rem);
+  --jd-space-xs: clamp(0.75rem, 0.6875rem + 0.2778vw, 0.9375rem);
+  --jd-space-s: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
+  --jd-space-m: clamp(1.5rem, 1.375rem + 0.5556vw, 1.875rem);
+  --jd-space-l: clamp(2rem, 1.8333rem + 0.7407vw, 2.5rem);
+  --jd-space-xl: clamp(3rem, 2.75rem + 1.1111vw, 3.75rem);
+  --jd-space-2xl: clamp(4rem, 3.6667rem + 1.4815vw, 5rem);
+  --jd-space-3xl: clamp(6rem, 5.5rem + 2.2222vw, 7.5rem);
+  --jd-space-3xs-2xs: clamp(0.25rem, 0.125rem + 0.5556vw, 0.625rem);
+  --jd-space-2xs-xs: clamp(0.5rem, 0.3542rem + 0.6481vw, 0.9375rem);
+  --jd-space-xs-s: clamp(0.75rem, 0.5833rem + 0.7407vw, 1.25rem);
+  --jd-space-s-m: clamp(1rem, 0.7083rem + 1.2963vw, 1.875rem);
+  --jd-space-m-l: clamp(1.5rem, 1.1667rem + 1.4815vw, 2.5rem);
+  --jd-space-l-xl: clamp(2rem, 1.4167rem + 2.5926vw, 3.75rem);
+  --jd-space-xl-2xl: clamp(3rem, 2.3333rem + 2.963vw, 5rem);
+  --jd-space-2xl-3xl: clamp(4rem, 2.8333rem + 5.1852vw, 7.5rem);
+  --jd-space-s-l: clamp(1rem, 0.5rem + 2.2222vw, 2.5rem);
+  --jd-space-m-xl: clamp(1.5rem, 0.75rem + 3.3333vw, 3.75rem);
+  --jd-space-l-2xl: clamp(2rem, 1rem + 4.4444vw, 5rem);
+  --jd-space-xl-3xl: clamp(3rem, 1.5rem + 6.6667vw, 7.5rem);
+
+  /* Font: solo la famiglia, il caricamento (self-hosted) lo fa il progetto */
+  --jd-font-heading: system-ui, sans-serif;
+  --jd-font-body: system-ui, sans-serif;
+  --jd-font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Interlinea, tracking, pesi */
+  --jd-leading-tight: 1.15;
+  --jd-leading-normal: 1.6;
+  --jd-leading-loose: 1.8;
+  --jd-tracking-tight: -0.02em;
+  --jd-tracking-normal: 0;
+  --jd-tracking-wide: 0.05em;
+  --jd-weight-regular: 400;
+  --jd-weight-bold: 700;
+  --jd-code-size: 0.9em;
+
+  /* Layout */
+  --jd-container-max: 75rem;
+  --jd-container-narrow: 45rem;
+  --jd-container-wide: 90rem;
+  --jd-gutter: var(--jd-space-s-l);
+  --jd-measure: 65ch;
+
+  /* Colori di base (servono al reset) e focus */
+  --jd-color-text: #1a1a1a;
+  --jd-color-bg: #ffffff;
+  --jd-focus-color: var(--jd-color-text);
+  --jd-focus-width: 0.1875rem;
+  --jd-focus-offset: 0.125rem;
+  --jd-border-width: 0.125rem;
+
+  /* Default delle classi di layout: si cambiano qui per tutto il progetto, o su un elemento con style="" */
+  --jd-section-space: var(--jd-space-l-2xl);
+  --jd-stack-gap: var(--jd-space-m);
+  --jd-cluster-gap: var(--jd-space-s);
+  --jd-cluster-justify: flex-start;
+  --jd-cluster-align: center;
+  --jd-grid-min: 16rem;
+  --jd-grid-gap: var(--jd-space-m);
+  --jd-sidebar-width: 20rem;
+  --jd-sidebar-content-min: 50%;
+  --jd-sidebar-gap: var(--jd-space-m);
+  --jd-switcher-threshold: 40rem;
+  --jd-switcher-gap: var(--jd-space-m);
+  --jd-flow-space: var(--jd-space-s);
+  --jd-flow-heading-space: var(--jd-space-l);
+}
